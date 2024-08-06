@@ -5,7 +5,7 @@ import (
 
 	"githubcom/kosatnkn/web-page-analyzer-api/app/adapters"
 	"githubcom/kosatnkn/web-page-analyzer-api/app/config"
-	"github.com/kosatnkn/db/mysql"
+
 	"github.com/kosatnkn/log"
 	"github.com/kosatnkn/validator"
 )
@@ -13,21 +13,10 @@ import (
 // resolveAdapters resolves all adapters.
 func resolveAdapters(cfg *config.Config) Adapters {
 	ats := Adapters{}
-	ats.DB = resolveDBAdapter(cfg.DB)
 	ats.Log = resolveLogAdapter(cfg.Log)
 	ats.Validator = resolveValidatorAdapter()
 
 	return ats
-}
-
-// resolveDBAdapter resolves the database adapter.
-func resolveDBAdapter(cfg mysql.Config) adapters.DBAdapterInterface {
-	db, err := mysql.NewAdapter(cfg)
-	if err != nil {
-		panic(fmt.Sprintf("error: %v", err))
-	}
-
-	return db
 }
 
 // resolveLogAdapter resolves the logging adapter.

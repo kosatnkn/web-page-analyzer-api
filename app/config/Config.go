@@ -1,14 +1,12 @@
 package config
 
 import (
-	"github.com/kosatnkn/db/mysql"
 	"github.com/kosatnkn/log"
 )
 
 // Config is the master config struct that holds all other config structs.
 type Config struct {
 	App      AppConfig
-	DB       mysql.Config
 	Log      log.Config
 	Services []ServiceConfig
 }

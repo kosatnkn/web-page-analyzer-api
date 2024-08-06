@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/kosatnkn/db/mysql"
 	"github.com/kosatnkn/log"
 	"gopkg.in/yaml.v2"
 )
@@ -17,7 +16,6 @@ func Parse(cfgDir string) *Config {
 
 	return &Config{
 		App:      parseAppConfig(dir),
-		DB:       parseDBConfig(dir),
 		Log:      parseLogConfig(dir),
 		Services: parseServicesConfig(dir),
 	}
@@ -35,14 +33,6 @@ func parseAppConfig(dir string) AppConfig {
 func parseLogConfig(dir string) log.Config {
 	cfg := log.Config{}
 	parseConfig(dir+"logger.yaml", &cfg)
-
-	return cfg
-}
-
-// parseDBConfig parses database configurations.
-func parseDBConfig(dir string) mysql.Config {
-	cfg := mysql.Config{}
-	parseConfig(dir+"database.yaml", &cfg)
 
 	return cfg
 }

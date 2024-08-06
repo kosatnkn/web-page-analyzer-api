@@ -36,10 +36,6 @@ func Init(ctr *container.Container) *mux.Router {
 	r.HandleFunc("/", apiController.GetInfo).Methods(http.MethodGet)
 	// sample
 	r.HandleFunc("/samples", sampleController.Get).Methods(http.MethodGet)
-	r.HandleFunc("/samples/{id:[0-9]+}", sampleController.GetByID).Methods(http.MethodGet)
-	r.HandleFunc("/samples", sampleController.Add).Methods(http.MethodPost)
-	r.HandleFunc("/samples/{id:[0-9]+}", sampleController.Edit).Methods(http.MethodPut)
-	r.HandleFunc("/samples/{id:[0-9]+}", sampleController.Delete).Methods(http.MethodDelete)
 
 	return r
 }

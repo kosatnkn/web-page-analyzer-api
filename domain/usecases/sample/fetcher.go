@@ -4,32 +4,15 @@ import (
 	"context"
 
 	"githubcom/kosatnkn/web-page-analyzer-api/domain/entities"
+
 	"github.com/kosatnkn/req/filter"
 	"github.com/kosatnkn/req/paginator"
 )
 
 // Get returns a list of samples.
 func (s *Sample) Get(ctx context.Context, fts []filter.Filter, pgn paginator.Paginator) ([]entities.Sample, error) {
-	// get samples
-	samples, err := s.sampleRepository.Get(ctx, fts, pgn)
-	if err != nil {
-		return nil, s.errCannotGetData(err)
-	}
 
-	return samples, nil
-}
+	// TODO: implement
 
-// GetByID returns a single sample object by id.
-func (s *Sample) GetByID(ctx context.Context, id int) (entities.Sample, error) {
-	// get sample
-	sample, err := s.sampleRepository.GetByID(ctx, id)
-	if err != nil {
-		return entities.Sample{}, err
-	}
-
-	if sample.ID == 0 {
-		return entities.Sample{}, s.errNoSample(id)
-	}
-
-	return sample, nil
+	return nil, nil
 }

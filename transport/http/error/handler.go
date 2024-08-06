@@ -7,7 +7,6 @@ import (
 	"githubcom/kosatnkn/web-page-analyzer-api/app/adapters"
 
 	domainErrs "githubcom/kosatnkn/web-page-analyzer-api/domain/errors"
-	repositoryErrs "githubcom/kosatnkn/web-page-analyzer-api/externals/repositories/errors"
 	serviceErrs "githubcom/kosatnkn/web-page-analyzer-api/externals/services/errors"
 	middlewareErrs "githubcom/kosatnkn/web-page-analyzer-api/transport/http/middleware/errors"
 	unpackerErrs "githubcom/kosatnkn/web-page-analyzer-api/transport/http/request/unpackers/errors"
@@ -22,7 +21,6 @@ func Handle(ctx context.Context, err error, log adapters.LogAdapterInterface) (i
 		return formatGenericError(err), http.StatusInternalServerError
 	case *middlewareErrs.MiddlewareError,
 		*domainErrs.DomainError,
-		*repositoryErrs.RepositoryError,
 		*serviceErrs.ServiceError:
 		logError(ctx, log, err)
 		return formatGenericError(err), http.StatusBadRequest
