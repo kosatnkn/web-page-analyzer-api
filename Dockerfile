@@ -19,6 +19,6 @@ COPY --from=builder /opt/app/main .
 COPY ./configs/ ./configs/
 
 # inform exposed ports
-EXPOSE 3000 3001
+EXPOSE 8080 8081
 
 CMD ["./main"]

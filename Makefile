@@ -9,7 +9,14 @@ test:
 
 # Mocking
 mock:
-	docker run --init --name catalyst_mock -it --rm -v $(PWD)/docs/api:/tmp -p 8000:4010 stoplight/prism mock -h 0.0.0.0 "/tmp/openapi.yaml"
+	docker run --init --name mock-web-page-analyzer-api -it --rm -v $(PWD)/docs/api:/tmp -p 8000:4010 stoplight/prism mock -h 0.0.0.0 "/tmp/openapi.yaml"
+
+# Containerizing
+docker_build:
+	# update metadata
+	./metadata.sh
+	docker build -t kosatnkn/web-page-analyzer-api:latest .
+
 
 # Go dependancy management
 dep_upgrade_list:
