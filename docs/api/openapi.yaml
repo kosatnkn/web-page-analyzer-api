@@ -1,28 +1,26 @@
 openapi: 3.0.0
 
 info:
-  title: Catalyst
+  title: Web Page Analyzer API
   description: >
-    A REST API base written in Golang
-  version: v2.5.1
+    Provide an analytical summary for a web page
+  version: v0.1.0
 
 servers:
-  - url: http://localhost:3000/api
+  - url: http://localhost:3000
     description: Mock
 
 paths:
-
   # -------------------------------------------------
   # API Information
   # -------------------------------------------------
-
   /:
     get: # Get API information
       tags:
-        - information
+      - information
       summary: Sends information about the API
       description: >
-        Provides information about the API like `name`, `version`, `purpose`.
+        Provides information about the API like name, version, purpose.
       responses:
         '200':
           description: API Details
@@ -37,190 +35,98 @@ paths:
                       name:
                         type: string
                         enum:
-                          - $ref: '#/info/title'
+                        - $ref: '#/info/title'
                       version:
                         type: string
                         enum:
-                          - $ref: '#/info/version'
+                        - $ref: '#/info/version'
                       purpose:
                         type: string
                         enum:
-                          - $ref: '#/info/description'
+                        - $ref: '#/info/description'
 
   # -------------------------------------------------
-  # Sample
+  # Reports
   # -------------------------------------------------
-
-  /samples:
-    get: # Get samples
+  /reports:
+    get: # Get a report about the url
       tags:
-        - samples
-      summary: Return a collection of samples
+      - reports
+      summary: Return a report about the web page that the url points to
       parameters:
-        - name: filters
-          in: query
-          description: Additional filters JSON in string serialized format
-          schema:
-            $ref: '#/components/schemas/filters'
-        - in: query
-          name: paginator
-          description: Paginator JSON in string serialized format
-          schema:
-            $ref: '#/components/schemas/paginator'
+      - name: url
+        in: query
+        description: The URL of the page that needs to be analyzed
+        schema:
+          type: string
+          example: "http://sample.com/"
+      - name: cmp
+        in: query
+        description: Component details that need to be added to the summary
+        schema:
+          type: string
+          example: '["h1","h2","h3","h4","h5","h6","a","login"]'
       responses:
         200:
-          description: Samples collection
+          description: Report
           content:
             application/json:
               schema:
                 type: object
                 properties:
                   data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/res_sample'
-        400:
-          description: Domain Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/generic_error'
-        500:
-          description: Service Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/generic_error'
-
-    post: # Create new sample
-      tags:
-        - samples
-      summary: Create a new sample
-      description: >
-        Create new sample from provided data.
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/req_sample'
-        required: true
-      responses:
-        201:
-          description: Sample created
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    $ref: '#/components/schemas/identifier'
-        400:
-          description: Domain Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/generic_error'
-        422:
-          description: Validation Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/validation_error'
-        500:
-          description: Service Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/generic_error'
-
-  /samples/{id}:
-    get: # Get sample by id
-      tags:
-        - samples
-      summary: Return a single sample by id
-      parameters:
-        - name: id
-          in: path
-          description: Identifier
-          required: true
-          schema:
-            type: integer
-      responses:
-        200:
-          description: Sample
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    $ref: '#/components/schemas/res_sample'
-        400:
-          description: Domain Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/generic_error'
-        500:
-          description: Service Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/generic_error'
-
-    put: # Edit sample
-      tags:
-        - samples
-      summary: Update a sample
-      parameters:
-        - name: id
-          in: path
-          description: Identifier
-          required: true
-          schema:
-            type: integer
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/req_sample'
-        required: true
-      responses:
-        204:
-          description: Sample updated
-        400:
-          description: Domain Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/generic_error'
-        422:
-          description: Validation Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/validation_error'
-        500:
-          description: Service Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/generic_error'
-
-    delete: # Delete sample
-      tags:
-        - samples
-      summary: Delete a sample
-      parameters:
-        - name: id
-          in: path
-          description: Identifier
-          required: true
-          schema:
-            type: integer
-      responses:
-        204:
-          description: Sample deleted
+                    type: object
+                    properties:
+                      meta:
+                        type: object
+                        properties:
+                          version:
+                            type: string
+                          title:
+                            type: string
+                      components:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            component:
+                              type: string
+                            count:
+                              type: integer
+                            summary:
+                              type: array
+                              items:
+                                type: object
+                example: {
+                  data: {
+                    meta: {
+                      version: "",
+                      title: ""
+                    },
+                    components: [
+                      {
+                        component: "h1",
+                        count: 1
+                      },
+                      {
+                        component: "login",
+                        count: 0
+                      },
+                      {
+                        component: "a",
+                        count: 10,
+                        # optional, use map[string]interface{} in transformer
+                        summary: [
+                          {
+                            url: "http://external.com",
+                            external: true,
+                            return_code: 200
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
         400:
           description: Domain Error
           content:
@@ -238,43 +144,8 @@ paths:
 # -------------------------------------------------
 # Components
 # -------------------------------------------------
-
 components:
-
   schemas:
-  
-    identifier: 
-      type: object
-      properties:
-        id:
-          type: integer
-          minimum: 1
-          maximum: 99999
-    
-    filters:
-      type: string
-      example: '[{"key": "value"}]'
-  
-    paginator: 
-      type: string
-      example: '{"page": 1, "size": 10}'
-      
-    req_sample: 
-      type: object
-      properties:
-        name:
-          type: string
-        password:
-          type: string
-    
-    res_sample: 
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-          
     generic_error:
       type: object
       properties:
@@ -288,18 +159,18 @@ components:
             trace:
               type: string
           required:
-            - code
-            - message
-    
+          - code
+          - message
+
     validation_error:
       type: object
       properties:
         errors:
           type: object
           properties:
-            field: 
+            field:
               type: array
-              items: 
+              items:
                 type: string
       required:
-        - errors
+      - errors
