@@ -3,8 +3,9 @@ package error
 import (
 	"strings"
 
-	"github.com/iancoleman/strcase"
 	"githubcom/kosatnkn/web-page-analyzer-api/transport/http/response/transformers"
+
+	"github.com/iancoleman/strcase"
 )
 
 // formatUnknownError formats errors of unknown error types.
@@ -61,9 +62,13 @@ func formatValidationPayload(p map[string]string) map[string]string {
 	return ep
 }
 
-// formatKey formats the key as a snake case string consisting only of lowecase characters.
+// formatKey formats the key as a snake case string consisting only of lowercase characters.
 func formatKey(k string) string {
 	kParts := strings.Split(k, ".")
+
+	if len(kParts) == 1 {
+		return kParts[0]
+	}
 
 	// remove unpacker name
 	kParts = kParts[1:]

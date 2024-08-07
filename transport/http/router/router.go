@@ -29,13 +29,13 @@ func Init(ctr *container.Container) *mux.Router {
 
 	// initialize controllers
 	apiController := controllers.NewAPIController(ctr)
-	sampleController := controllers.NewSampleController(ctr)
+	reportController := controllers.NewReportController(ctr)
 
 	// bind controller functions to routes
 	// api info
 	r.HandleFunc("/", apiController.GetInfo).Methods(http.MethodGet)
-	// sample
-	r.HandleFunc("/samples", sampleController.Get).Methods(http.MethodGet)
+	// report
+	r.HandleFunc("/reports", reportController.Get).Methods(http.MethodGet)
 
 	return r
 }
