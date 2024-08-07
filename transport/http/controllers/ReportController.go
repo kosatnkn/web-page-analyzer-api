@@ -6,6 +6,8 @@ import (
 
 	"githubcom/kosatnkn/web-page-analyzer-api/app/container"
 	"githubcom/kosatnkn/web-page-analyzer-api/domain/usecases/sample"
+	"githubcom/kosatnkn/web-page-analyzer-api/transport/http/request"
+	"githubcom/kosatnkn/web-page-analyzer-api/transport/http/request/unpackers"
 )
 
 // ReportController contains controller logic for endpoints.
@@ -27,21 +29,27 @@ func (ctl *ReportController) Get(w http.ResponseWriter, r *http.Request) {
 	// add a trace string to the request context
 	ctx := ctl.withTrace(r.Context(), "ReportController.Get")
 
-	// FIXME: the validator field
-	url := ctl.Controller.urlParam(r, "url")
+	url := ctl.urlParam(r, "url")
 	if errs := ctl.validator.ValidateField("url", url, "required,url"); errs != nil {
 		ctl.sendError(ctx, w, errs)
 		return
 	}
 
-	cmp := ctl.Controller.urlParam(r, "cmp")
+	cmp := ctl.urlParam(r, "cmp")
 	if errs := ctl.validator.ValidateField("cmp", cmp, "required,json"); errs != nil {
 		ctl.sendError(ctx, w, errs)
 		return
 	}
 
+	u := unpackers.NewComponentsUnpacker()
+	if err := request.Unpack([]byte(cmp), u); err != nil {
+		ctl.sendError(ctx, w, err)
+		return
+	}
+
 	fmt.Println(url)
 	fmt.Println(cmp)
+	fmt.Println(u)
 
 	// // transform report data
 	// trS, err := ctl.transform(samples, transformers.NewSampleTransformer(), true)
