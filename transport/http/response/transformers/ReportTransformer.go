@@ -7,6 +7,7 @@ import (
 
 // ReportTransformer is used to transform report data
 type ReportTransformer struct {
+	URL        string                 `json:"url"`
 	Version    string                 `json:"version"`
 	Title      string                 `json:"title"`
 	Components []ComponentTransformer `json:"components,omitempty"`
@@ -25,6 +26,7 @@ func (t *ReportTransformer) TransformAsObject(data interface{}) (interface{}, er
 	}
 
 	tr := ReportTransformer{
+		URL:     report.URL,
 		Version: report.Version,
 		Title:   report.Title,
 	}

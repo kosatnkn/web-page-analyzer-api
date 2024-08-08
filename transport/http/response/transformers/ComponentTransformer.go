@@ -27,7 +27,7 @@ func (t *ComponentTransformer) TransformAsObject(data interface{}) (interface{},
 	tr := ComponentTransformer{
 		Name:    c.Name,
 		Count:   c.Count,
-		Summary: c.Extra,
+		Summary: c.Summary,
 	}
 
 	return tr, nil
