@@ -77,19 +77,16 @@ paths:
                   data:
                     type: object
                     properties:
-                      meta:
-                        type: object
-                        properties:
-                          version:
-                            type: string
-                          title:
-                            type: string
+                      version:
+                        type: string
+                      title:
+                        type: string
                       components:
                         type: array
                         items:
                           type: object
                           properties:
-                            component:
+                            name:
                               type: string
                             count:
                               type: integer
@@ -99,21 +96,19 @@ paths:
                                 type: object
                 example: {
                   data: {
-                    meta: {
-                      version: "",
-                      title: ""
-                    },
+                    version: "",
+                    title: "",
                     components: [
                       {
-                        component: "h1",
+                        name: "h1",
                         count: 1
                       },
                       {
-                        component: "login",
+                        name: "login",
                         count: 0
                       },
                       {
-                        component: "a",
+                        name: "a",
                         count: 10,
                         # optional, use map[string]interface{} in transformer
                         summary: [
