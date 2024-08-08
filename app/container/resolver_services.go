@@ -10,7 +10,7 @@ import (
 // resolveServices resolves all services.
 func resolveServices(cfgs []config.ServiceConfig) Services {
 	svs := Services{}
-	svs.SampleService = services.NewSampleService(getServiceConfig(cfgs, "sample"))
+	svs.WebPageService = services.NewWebPageService()
 
 	return svs
 }

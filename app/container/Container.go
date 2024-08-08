@@ -23,5 +23,5 @@ type Adapters struct {
 //
 // These are abstractions to third party APIs. All services will be of a corresponding service interface type.
 type Services struct {
-	SampleService services.SampleServiceInterface
+	WebPageService services.WebPageServiceInterface
 }
