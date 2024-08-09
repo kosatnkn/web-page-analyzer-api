@@ -33,9 +33,9 @@ func Init(ctr *container.Container) *mux.Router {
 
 	// bind controller functions to routes
 	// api info
-	r.HandleFunc("/", apiController.GetInfo).Methods(http.MethodGet)
+	r.HandleFunc("/", apiController.GetInfo).Methods(http.MethodGet, http.MethodOptions)
 	// report
-	r.HandleFunc("/reports", reportController.Get).Methods(http.MethodGet)
+	r.HandleFunc("/reports", reportController.Get).Methods(http.MethodGet, http.MethodOptions)
 
 	return r
 }
