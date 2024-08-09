@@ -5,9 +5,9 @@ import (
 
 	"github.com/gorilla/mux"
 
-	"githubcom/kosatnkn/web-page-analyzer-api/app/container"
-	"githubcom/kosatnkn/web-page-analyzer-api/transport/http/controllers"
-	"githubcom/kosatnkn/web-page-analyzer-api/transport/http/middleware"
+	"github.com/kosatnkn/web-page-analyzer-api/app/container"
+	"github.com/kosatnkn/web-page-analyzer-api/transport/http/controllers"
+	"github.com/kosatnkn/web-page-analyzer-api/transport/http/middleware"
 )
 
 // Init initializes the router.

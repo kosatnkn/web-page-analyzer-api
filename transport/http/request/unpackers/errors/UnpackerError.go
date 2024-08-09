@@ -1,6 +1,6 @@
 package errors
 
-import e "githubcom/kosatnkn/web-page-analyzer-api/errors"
+import e "github.com/kosatnkn/web-page-analyzer-api/errors"
 
 // UnpackerError is the type of errors thrown by response transformers.
 type UnpackerError struct {

@@ -3,8 +3,8 @@ package splash
 import (
 	"fmt"
 
-	"githubcom/kosatnkn/web-page-analyzer-api/app/config"
-	"githubcom/kosatnkn/web-page-analyzer-api/metadata"
+	"github.com/kosatnkn/web-page-analyzer-api/app/config"
+	"github.com/kosatnkn/web-page-analyzer-api/metadata"
 )
 
 // Show a splash screen in one of several types.

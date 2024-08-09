@@ -6,8 +6,8 @@ import (
 
 	"fmt"
 
-	"githubcom/kosatnkn/web-page-analyzer-api/transport/http/request/unpackers"
-	"githubcom/kosatnkn/web-page-analyzer-api/transport/http/request/unpackers/errors"
+	"github.com/kosatnkn/web-page-analyzer-api/transport/http/request/unpackers"
+	"github.com/kosatnkn/web-page-analyzer-api/transport/http/request/unpackers/errors"
 )
 
 // Unpack the request in to the given unpacker struct.

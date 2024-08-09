@@ -1,6 +1,6 @@
 package webpage
 
-import "githubcom/kosatnkn/web-page-analyzer-api/domain/entities"
+import "github.com/kosatnkn/web-page-analyzer-api/domain/entities"
 
 func (wp *WebPage) _mock(url string) entities.Report {
 	r := entities.Report{

@@ -3,8 +3,8 @@ package container
 import (
 	"fmt"
 
-	"githubcom/kosatnkn/web-page-analyzer-api/app/config"
-	"githubcom/kosatnkn/web-page-analyzer-api/externals/services"
+	"github.com/kosatnkn/web-page-analyzer-api/app/config"
+	"github.com/kosatnkn/web-page-analyzer-api/externals/services"
 )
 
 // resolveServices resolves all services.

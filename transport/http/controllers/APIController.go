@@ -3,8 +3,8 @@ package controllers
 import (
 	"net/http"
 
-	"githubcom/kosatnkn/web-page-analyzer-api/app/container"
-	"githubcom/kosatnkn/web-page-analyzer-api/transport/http/response/transformers"
+	"github.com/kosatnkn/web-page-analyzer-api/app/container"
+	"github.com/kosatnkn/web-page-analyzer-api/transport/http/response/transformers"
 )
 
 // APIController contains controller logic for endpoints.

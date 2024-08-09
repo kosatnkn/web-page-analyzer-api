@@ -5,7 +5,7 @@ import (
 
 	"github.com/google/uuid"
 
-	"githubcom/kosatnkn/web-page-analyzer-api/app/container"
+	"github.com/kosatnkn/web-page-analyzer-api/app/container"
 )
 
 // RequestAlterMiddleware alerts the request.

@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"net/http"
 
-	"githubcom/kosatnkn/web-page-analyzer-api/app/container"
-	"githubcom/kosatnkn/web-page-analyzer-api/transport/http/middleware/errors"
-	"githubcom/kosatnkn/web-page-analyzer-api/transport/http/response"
+	"github.com/kosatnkn/web-page-analyzer-api/app/container"
+	"github.com/kosatnkn/web-page-analyzer-api/transport/http/middleware/errors"
+	"github.com/kosatnkn/web-page-analyzer-api/transport/http/response"
 )
 
 // RequestCheckerMiddleware validates the request header.

@@ -3,7 +3,7 @@ package error
 import (
 	"strings"
 
-	"githubcom/kosatnkn/web-page-analyzer-api/transport/http/response/transformers"
+	"github.com/kosatnkn/web-page-analyzer-api/transport/http/response/transformers"
 
 	"github.com/iancoleman/strcase"
 )

@@ -5,12 +5,12 @@ import (
 	"io"
 	"net/http"
 
-	"githubcom/kosatnkn/web-page-analyzer-api/app/adapters"
-	"githubcom/kosatnkn/web-page-analyzer-api/app/container"
-	"githubcom/kosatnkn/web-page-analyzer-api/transport/http/request"
-	"githubcom/kosatnkn/web-page-analyzer-api/transport/http/request/unpackers"
-	"githubcom/kosatnkn/web-page-analyzer-api/transport/http/response"
-	"githubcom/kosatnkn/web-page-analyzer-api/transport/http/response/transformers"
+	"github.com/kosatnkn/web-page-analyzer-api/app/adapters"
+	"github.com/kosatnkn/web-page-analyzer-api/app/container"
+	"github.com/kosatnkn/web-page-analyzer-api/transport/http/request"
+	"github.com/kosatnkn/web-page-analyzer-api/transport/http/request/unpackers"
+	"github.com/kosatnkn/web-page-analyzer-api/transport/http/response"
+	"github.com/kosatnkn/web-page-analyzer-api/transport/http/response/transformers"
 
 	"github.com/gorilla/mux"
 )

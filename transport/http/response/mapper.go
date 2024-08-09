@@ -1,8 +1,8 @@
 package response
 
 import (
-	"githubcom/kosatnkn/web-page-analyzer-api/transport/http/response/mappers"
-	"githubcom/kosatnkn/web-page-analyzer-api/transport/http/response/transformers"
+	"github.com/kosatnkn/web-page-analyzer-api/transport/http/response/mappers"
+	"github.com/kosatnkn/web-page-analyzer-api/transport/http/response/transformers"
 )
 
 // mapData wraps payload in a standard response payload object.

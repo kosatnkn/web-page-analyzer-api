@@ -1,8 +1,8 @@
 package transformers
 
 import (
-	"githubcom/kosatnkn/web-page-analyzer-api/transport/http/response/transformers/errors"
 	"github.com/kosatnkn/req/paginator"
+	"github.com/kosatnkn/web-page-analyzer-api/transport/http/response/transformers/errors"
 )
 
 // PaginatorTransformer is used to transform school

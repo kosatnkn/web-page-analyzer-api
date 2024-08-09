@@ -5,11 +5,11 @@ import (
 	"os"
 	"os/signal"
 
-	"githubcom/kosatnkn/web-page-analyzer-api/app/config"
-	"githubcom/kosatnkn/web-page-analyzer-api/app/container"
-	"githubcom/kosatnkn/web-page-analyzer-api/app/splash"
-	httpServer "githubcom/kosatnkn/web-page-analyzer-api/transport/http/server"
-	metricsServer "githubcom/kosatnkn/web-page-analyzer-api/transport/metrics/server"
+	"github.com/kosatnkn/web-page-analyzer-api/app/config"
+	"github.com/kosatnkn/web-page-analyzer-api/app/container"
+	"github.com/kosatnkn/web-page-analyzer-api/app/splash"
+	httpServer "github.com/kosatnkn/web-page-analyzer-api/transport/http/server"
+	metricsServer "github.com/kosatnkn/web-page-analyzer-api/transport/metrics/server"
 )
 
 func main() {

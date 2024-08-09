@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"net/http"
 
-	"githubcom/kosatnkn/web-page-analyzer-api/app/adapters"
-	errHandler "githubcom/kosatnkn/web-page-analyzer-api/transport/http/error"
+	"github.com/kosatnkn/web-page-analyzer-api/app/adapters"
+	errHandler "github.com/kosatnkn/web-page-analyzer-api/transport/http/error"
 )
 
 // Send sets all required fields and write the response.

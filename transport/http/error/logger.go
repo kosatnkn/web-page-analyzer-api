@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 
-	"githubcom/kosatnkn/web-page-analyzer-api/app/adapters"
+	"github.com/kosatnkn/web-page-analyzer-api/app/adapters"
 )
 
 // logError logs the error with trace.

@@ -1,8 +1,8 @@
 package container
 
 import (
-	"githubcom/kosatnkn/web-page-analyzer-api/app/adapters"
-	"githubcom/kosatnkn/web-page-analyzer-api/domain/boundary/services"
+	"github.com/kosatnkn/web-page-analyzer-api/app/adapters"
+	"github.com/kosatnkn/web-page-analyzer-api/domain/boundary/services"
 )
 
 // Container holds all resolved dependencies that needs to be injected at run time.

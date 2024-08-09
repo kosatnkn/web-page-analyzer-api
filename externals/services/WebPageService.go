@@ -2,12 +2,14 @@ package services
 
 import (
 	"fmt"
-	"githubcom/kosatnkn/web-page-analyzer-api/domain/boundary/services"
-	"githubcom/kosatnkn/web-page-analyzer-api/domain/entities"
-	"githubcom/kosatnkn/web-page-analyzer-api/externals/services/errors"
 	"io"
 	"net/http"
+	"net/url"
 	"strings"
+
+	"github.com/kosatnkn/web-page-analyzer-api/domain/boundary/services"
+	"github.com/kosatnkn/web-page-analyzer-api/domain/entities"
+	"github.com/kosatnkn/web-page-analyzer-api/externals/services/errors"
 
 	"golang.org/x/net/html"
 )
@@ -25,7 +27,7 @@ func (svc *WebPageService) Page(url string, withBody bool) (entities.Page, error
 	// retrieve page
 	res, err := http.Get(url)
 	if err != nil {
-		return entities.Page{}, svc.errorPageNotFound(err, res.StatusCode)
+		return entities.Page{URL: url, StatusCode: res.StatusCode}, svc.errorPageNotFound(err, res.StatusCode)
 	}
 	defer res.Body.Close()
 
@@ -56,12 +58,14 @@ func (svc *WebPageService) Analyze(url string, components []string) (entities.Re
 	return svc.analyze(res, components)
 }
 
+// analyze does all the heavy lifting of the analysis.
 func (svc *WebPageService) analyze(res *http.Response, components []string) (entities.Report, error) {
 	r := entities.Report{
 		URL:        res.Request.URL.String(),
 		StatusCode: res.StatusCode,
 	}
 	counter := svc.initCounterMap(components)
+	var aSummary []map[string]interface{}
 
 	// create an HTML tokenizer
 	z := html.NewTokenizer(res.Body)
@@ -80,6 +84,10 @@ func (svc *WebPageService) analyze(res *http.Response, components []string) (ent
 				// the immediate token after the <title> token is the text token with the value of the title
 				z.Next()
 				r.Title = z.Token().Data
+				break
+			}
+			if t.Data == "a" {
+				aSummary = append(aSummary, svc.aExtras(t))
 			}
 		}
 
@@ -89,10 +97,21 @@ func (svc *WebPageService) analyze(res *http.Response, components []string) (ent
 		}
 	}
 
-	// TODO: trace
-	fmt.Println(r)
-	fmt.Println(counter)
+	// // TODO: trace
+	// fmt.Println(counter)
+	// fmt.Println(aSummary)
 
+	for k, v := range counter {
+		if v != 0 {
+			c := entities.Component{Name: k, Count: v}
+			if k == "a" {
+				c.Summary = aSummary
+			}
+			r.Components = append(r.Components, c)
+		}
+	}
+
+	fmt.Println(r)
 	return r, nil
 }
 
@@ -112,6 +131,28 @@ func (svc *WebPageService) incrCounterMap(counter map[string]uint32, component s
 	if v, ok := counter[component]; ok {
 		counter[component] = v + 1
 	}
+}
+
+// aExtras returns additional info on an <a> tag.
+func (svc *WebPageService) aExtras(t html.Token) map[string]interface{} {
+	m := make(map[string]interface{})
+	for _, a := range t.Attr {
+		m[a.Key] = a.Val
+	}
+
+	if url, ok := m["href"]; ok {
+		p, _ := svc.Page(url.(string), false)
+		m["status"] = p.StatusCode
+		m["external"] = svc.isExternalLink(p.URL)
+	}
+
+	return m
+}
+
+// isExternalLink checks whether the link is an external url.
+func (svc *WebPageService) isExternalLink(link string) bool {
+	u, _ := url.Parse(link)
+	return u.Scheme != "" && u.Host != ""
 }
 
 // toHTMLVersion infer the HTML version from the DOCTYPE data.

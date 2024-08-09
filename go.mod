@@ -1,4 +1,4 @@
-module githubcom/kosatnkn/web-page-analyzer-api
+module github.com/kosatnkn/web-page-analyzer-api
 
 go 1.22.0
 

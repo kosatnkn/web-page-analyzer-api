@@ -2,8 +2,9 @@ package services_test
 
 import (
 	"fmt"
-	"githubcom/kosatnkn/web-page-analyzer-api/externals/services"
 	"testing"
+
+	"github.com/kosatnkn/web-page-analyzer-api/externals/services"
 )
 
 func TestAnalyze(t *testing.T) {

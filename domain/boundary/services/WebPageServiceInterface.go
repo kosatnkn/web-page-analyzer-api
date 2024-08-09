@@ -1,6 +1,6 @@
 package services
 
-import "githubcom/kosatnkn/web-page-analyzer-api/domain/entities"
+import "github.com/kosatnkn/web-page-analyzer-api/domain/entities"
 
 // WebPageServiceInterface contract to manipulate web page retrieval.
 type WebPageServiceInterface interface {

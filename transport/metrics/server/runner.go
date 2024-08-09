@@ -9,9 +9,9 @@ import (
 
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 
-	"githubcom/kosatnkn/web-page-analyzer-api/app/config"
-	"githubcom/kosatnkn/web-page-analyzer-api/app/container"
-	"githubcom/kosatnkn/web-page-analyzer-api/app/metrics"
+	"github.com/kosatnkn/web-page-analyzer-api/app/config"
+	"github.com/kosatnkn/web-page-analyzer-api/app/container"
+	"github.com/kosatnkn/web-page-analyzer-api/app/metrics"
 )
 
 // Run runs a server to exposes metrics as a separate Prometheus metric server.

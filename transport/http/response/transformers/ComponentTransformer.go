@@ -1,8 +1,8 @@
 package transformers
 
 import (
-	"githubcom/kosatnkn/web-page-analyzer-api/domain/entities"
-	"githubcom/kosatnkn/web-page-analyzer-api/transport/http/response/transformers/errors"
+	"github.com/kosatnkn/web-page-analyzer-api/domain/entities"
+	"github.com/kosatnkn/web-page-analyzer-api/transport/http/response/transformers/errors"
 )
 
 // ComponentTransformer is used to transform report data

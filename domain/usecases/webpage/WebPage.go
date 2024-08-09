@@ -1,8 +1,8 @@
 package webpage
 
 import (
-	"githubcom/kosatnkn/web-page-analyzer-api/app/container"
-	"githubcom/kosatnkn/web-page-analyzer-api/domain/boundary/services"
+	"github.com/kosatnkn/web-page-analyzer-api/app/container"
+	"github.com/kosatnkn/web-page-analyzer-api/domain/boundary/services"
 )
 
 // WebPage contains all usecases for web page analyzing

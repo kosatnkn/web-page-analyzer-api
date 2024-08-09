@@ -1,7 +1,7 @@
 package container
 
 import (
-	"githubcom/kosatnkn/web-page-analyzer-api/app/config"
+	"github.com/kosatnkn/web-page-analyzer-api/app/config"
 )
 
 // Resolve resolves the entire container.

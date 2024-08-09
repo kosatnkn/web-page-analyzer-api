@@ -1,7 +1,7 @@
 package response
 
 import (
-	"githubcom/kosatnkn/web-page-analyzer-api/transport/http/response/transformers"
+	"github.com/kosatnkn/web-page-analyzer-api/transport/http/response/transformers"
 )
 
 // Transform transforms data either as an object or as a collection depending on the `isCollection` boolean value.

@@ -1,6 +1,6 @@
 package errors
 
-import e "githubcom/kosatnkn/web-page-analyzer-api/errors"
+import e "github.com/kosatnkn/web-page-analyzer-api/errors"
 
 // ServiceError is the type of errors thrown by services talking to third party APIs.
 type ServiceError struct {

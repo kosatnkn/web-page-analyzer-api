@@ -3,8 +3,8 @@ package container
 import (
 	"fmt"
 
-	"githubcom/kosatnkn/web-page-analyzer-api/app/adapters"
-	"githubcom/kosatnkn/web-page-analyzer-api/app/config"
+	"github.com/kosatnkn/web-page-analyzer-api/app/adapters"
+	"github.com/kosatnkn/web-page-analyzer-api/app/config"
 
 	"github.com/kosatnkn/log"
 	"github.com/kosatnkn/validator"

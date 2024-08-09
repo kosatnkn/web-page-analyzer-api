@@ -7,9 +7,9 @@ import (
 	"strconv"
 	"time"
 
-	"githubcom/kosatnkn/web-page-analyzer-api/app/config"
-	"githubcom/kosatnkn/web-page-analyzer-api/app/container"
-	"githubcom/kosatnkn/web-page-analyzer-api/transport/http/router"
+	"github.com/kosatnkn/web-page-analyzer-api/app/config"
+	"github.com/kosatnkn/web-page-analyzer-api/app/container"
+	"github.com/kosatnkn/web-page-analyzer-api/transport/http/router"
 )
 
 // Run runs the http server.

@@ -3,7 +3,7 @@ package webpage
 import (
 	"fmt"
 
-	err "githubcom/kosatnkn/web-page-analyzer-api/domain/errors"
+	err "github.com/kosatnkn/web-page-analyzer-api/domain/errors"
 )
 
 func (s *WebPage) errNoWebPage(url string) error {

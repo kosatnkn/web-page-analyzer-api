@@ -6,7 +6,7 @@ import (
 	"strings"
 	"time"
 
-	"githubcom/kosatnkn/web-page-analyzer-api/transport/http/metrics"
+	"github.com/kosatnkn/web-page-analyzer-api/transport/http/metrics"
 )
 
 // MetricsMiddleware attaches metrics to the request.

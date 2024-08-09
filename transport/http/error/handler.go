@@ -4,13 +4,13 @@ import (
 	"context"
 	"net/http"
 
-	"githubcom/kosatnkn/web-page-analyzer-api/app/adapters"
+	"github.com/kosatnkn/web-page-analyzer-api/app/adapters"
 
-	domainErrs "githubcom/kosatnkn/web-page-analyzer-api/domain/errors"
-	serviceErrs "githubcom/kosatnkn/web-page-analyzer-api/externals/services/errors"
-	middlewareErrs "githubcom/kosatnkn/web-page-analyzer-api/transport/http/middleware/errors"
-	unpackerErrs "githubcom/kosatnkn/web-page-analyzer-api/transport/http/request/unpackers/errors"
-	transformerErrs "githubcom/kosatnkn/web-page-analyzer-api/transport/http/response/transformers/errors"
+	domainErrs "github.com/kosatnkn/web-page-analyzer-api/domain/errors"
+	serviceErrs "github.com/kosatnkn/web-page-analyzer-api/externals/services/errors"
+	middlewareErrs "github.com/kosatnkn/web-page-analyzer-api/transport/http/middleware/errors"
+	unpackerErrs "github.com/kosatnkn/web-page-analyzer-api/transport/http/request/unpackers/errors"
+	transformerErrs "github.com/kosatnkn/web-page-analyzer-api/transport/http/response/transformers/errors"
 )
 
 // Handle handles all errors globally.

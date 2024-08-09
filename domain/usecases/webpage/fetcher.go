@@ -2,7 +2,8 @@ package webpage
 
 import (
 	"context"
-	"githubcom/kosatnkn/web-page-analyzer-api/domain/entities"
+
+	"github.com/kosatnkn/web-page-analyzer-api/domain/entities"
 )
 
 // Report returns a summarized report about the page.
