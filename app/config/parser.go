@@ -15,9 +15,9 @@ func Parse(cfgDir string) *Config {
 	dir := getConfigDir(cfgDir)
 
 	return &Config{
-		App:      parseAppConfig(dir),
-		Log:      parseLogConfig(dir),
-		Services: parseServicesConfig(dir),
+		App: parseAppConfig(dir),
+		Log: parseLogConfig(dir),
+		// Services: parseServicesConfig(dir),
 	}
 }
 
