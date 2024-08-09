@@ -1,6 +1,8 @@
+# ref: https://bytes.usc.edu/cs104/wiki/makefile
+.PHONY: run test mock docker_build dep_upgrade_list dep_upgrade_all
+
 # Running and Testing
 run:
-	# update metadata
 	./metadata.sh
 	go run main.go
 
@@ -13,10 +15,8 @@ mock:
 
 # Containerizing
 docker_build:
-	# update metadata
 	./metadata.sh
 	docker build -t kosatnkn/web-page-analyzer-api:latest .
-
 
 # Go dependancy management
 dep_upgrade_list:
