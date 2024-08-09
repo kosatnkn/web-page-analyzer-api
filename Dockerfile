@@ -11,7 +11,7 @@ COPY . .
 RUN go build -o main .
 
 # Running
-FROM alpine:latest AS runner
+FROM alpine:3.20.2 AS runner
 
 WORKDIR /opt/
 

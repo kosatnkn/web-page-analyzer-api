@@ -8,14 +8,12 @@ import (
 
 // Report returns a summarized report about the page.
 func (wp *WebPage) Report(ctx context.Context, url string, components []string) (entities.Report, error) {
-	return wp.mock(url), nil
+	p, err := wp.webPageService.Page(url, true)
+	if err != nil {
+		return entities.Report{}, err
+	}
 
-	// p, err := wp.webPageService.Page(url, true)
-	// if err != nil {
-	// 	return entities.Report{}, err
-	// }
-
-	// return wp.analyze(ctx, p, components)
+	return wp.analyze(ctx, p, components)
 }
 
 // analyze the page against the given set of components and produce a report.
@@ -32,7 +30,7 @@ func (wp *WebPage) analyze(ctx context.Context, page entities.Page, components [
 	return report, nil
 }
 
-func (wp *WebPage) mock(url string) entities.Report {
+func (wp *WebPage) _mock(url string) entities.Report {
 	r := entities.Report{
 		URL:     url,
 		Version: "1.1",
