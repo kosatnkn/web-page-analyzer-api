@@ -133,7 +133,3 @@ func (svc *WebPageService) toHTMLVersion(data string) string {
 func (svc *WebPageService) errorPageNotFound(cause error, statusCode int) error {
 	return errors.NewServiceError("101", fmt.Sprintf("webpage-service: %d, error retrieving page", statusCode), cause)
 }
-
-func (svc *WebPageService) errorReadingBody(cause error) error {
-	return errors.NewServiceError("102", "webpage-service: error reading page body", cause)
-}
