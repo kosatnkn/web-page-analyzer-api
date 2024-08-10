@@ -40,6 +40,7 @@ func (svc *WebPageService) analyze(res *http.Response, components []string) (ent
 	}
 	counter := svc.initCounterMap(components)
 	var aSummary []map[string]interface{}
+	var formSummary []map[string]interface{}
 
 	// create an HTML tokenizer
 	z := html.NewTokenizer(res.Body)
@@ -53,15 +54,16 @@ func (svc *WebPageService) analyze(res *http.Response, components []string) (ent
 		case html.StartTagToken, html.SelfClosingTagToken:
 			t := z.Token()
 			svc.incrCounterMap(counter, t.Data)
-			if t.Data == "title" {
+			switch t.Data {
+			case "title":
 				// move pointer forward one position because
 				// the immediate token after the <title> token is the text token with the value of the title
 				z.Next()
 				r.Title = z.Token().Data
-				break
-			}
-			if t.Data == "a" {
+			case "a":
 				aSummary = append(aSummary, svc.aExtras(t))
+			case "form":
+				formSummary = append(formSummary, svc.formExtras(t))
 			}
 		}
 
@@ -71,11 +73,15 @@ func (svc *WebPageService) analyze(res *http.Response, components []string) (ent
 		}
 	}
 
+	// add respective summaries to tag types
 	for k, v := range counter {
 		if v != 0 {
 			c := entities.Component{Name: k, Count: v}
-			if k == "a" {
+			switch k {
+			case "a":
 				c.Summary = aSummary
+			case "form":
+				c.Summary = formSummary
 			}
 			r.Components = append(r.Components, c)
 		}
@@ -112,6 +118,21 @@ func (svc *WebPageService) aExtras(t html.Token) map[string]interface{} {
 		}
 	}
 
+	return m
+}
+
+// formExtras returns additional info on a <form> tag.
+func (svc *WebPageService) formExtras(t html.Token) map[string]interface{} {
+	m := make(map[string]interface{})
+
+	for _, a := range t.Attr {
+		if strings.Contains(a.Val, "login") {
+			m["login"] = true
+			return m
+		}
+	}
+
+	m["login"] = false
 	return m
 }
 
