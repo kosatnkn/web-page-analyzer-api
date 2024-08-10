@@ -2,7 +2,6 @@ package services
 
 import (
 	"fmt"
-	"io"
 	"net/http"
 	"strings"
 
@@ -19,30 +18,6 @@ type WebPageService struct{}
 // NewWebPageService creates a new instance of the service.
 func NewWebPageService() services.WebPageServiceInterface {
 	return &WebPageService{}
-}
-
-// Page retrieves the web page.
-func (svc *WebPageService) Page(url string, withBody bool) (entities.Page, error) {
-	// retrieve page
-	res, err := http.Get(url)
-	if err != nil {
-		return entities.Page{URL: url, StatusCode: res.StatusCode}, svc.errorPageNotFound(err, res.StatusCode)
-	}
-	defer res.Body.Close()
-
-	p := entities.Page{
-		URL:        url,
-		StatusCode: res.StatusCode,
-	}
-	if withBody {
-		b, err := io.ReadAll(res.Body)
-		if err != nil {
-			return p, svc.errorReadingBody(err)
-		}
-		p.Body = b
-	}
-
-	return p, nil
 }
 
 // Analyze returns a report after analyzing the web page against provided criteria.
@@ -106,7 +81,6 @@ func (svc *WebPageService) analyze(res *http.Response, components []string) (ent
 		}
 	}
 
-	// fmt.Println(r)
 	return r, nil
 }
 
