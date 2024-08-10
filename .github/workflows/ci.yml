@@ -33,8 +33,3 @@ jobs:
 
     - name: Test
       run: go test -covermode=count -coverpkg=./... -coverprofile=cover.out ./...
-
-    - name: Coverage
-      uses: shogo82148/actions-goveralls@v1
-      with:
-        path-to-profile: cover.out
