@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	"net/url"
 	"strings"
 
 	"github.com/kosatnkn/web-page-analyzer-api/domain/boundary/services"
@@ -97,10 +96,6 @@ func (svc *WebPageService) analyze(res *http.Response, components []string) (ent
 		}
 	}
 
-	// // TODO: trace
-	// fmt.Println(counter)
-	// fmt.Println(aSummary)
-
 	for k, v := range counter {
 		if v != 0 {
 			c := entities.Component{Name: k, Count: v}
@@ -111,7 +106,7 @@ func (svc *WebPageService) analyze(res *http.Response, components []string) (ent
 		}
 	}
 
-	fmt.Println(r)
+	// fmt.Println(r)
 	return r, nil
 }
 
@@ -137,13 +132,10 @@ func (svc *WebPageService) incrCounterMap(counter map[string]uint32, component s
 func (svc *WebPageService) aExtras(t html.Token) map[string]interface{} {
 	m := make(map[string]interface{})
 	for _, a := range t.Attr {
-		m[a.Key] = a.Val
-	}
-
-	if url, ok := m["href"]; ok {
-		p, _ := svc.Page(url.(string), false)
-		m["status"] = p.StatusCode
-		m["external"] = svc.isExternalLink(p.URL)
+		if a.Key == "href" {
+			m["href"] = a.Val
+			m["external"] = svc.isExternalLink(a.Val)
+		}
 	}
 
 	return m
@@ -151,41 +143,17 @@ func (svc *WebPageService) aExtras(t html.Token) map[string]interface{} {
 
 // isExternalLink checks whether the link is an external url.
 func (svc *WebPageService) isExternalLink(link string) bool {
-	u, _ := url.Parse(link)
-	return u.Scheme != "" && u.Host != ""
+	return strings.HasPrefix(link, "http")
 }
 
 // toHTMLVersion infer the HTML version from the DOCTYPE data.
-// ref: https://www.w3.org/QA/2002/04/valid-dtd-list.html
 func (svc *WebPageService) toHTMLVersion(data string) string {
 	data = strings.ToLower(data)
-
-	switch data {
-	case `html`:
-		return `html5`
-	case `html public "-//w3c//dtd html 4.01//en" "http://www.w3.org/tr/html4/strict.dtd`:
-		return `html 4.01 strict`
-	case `html public "-//w3c//dtd html 4.01 transitional//en" "http://www.w3.org/tr/html4/loose.dtd`:
-		return `html 4.01 transitional`
-	case `html public "-//w3c//dtd html 4.01 frameset//en" "http://www.w3.org/tr/html4/frameset.dtd`:
-		return `html 4.01 frameset`
-	case `html public "-//w3c//dtd xhtml 1.0 strict//en" "http://www.w3.org/tr/xhtml1/dtd/xhtml1-strict.dtd`:
-		return `xhtml 1.0 strict`
-	case `html public "-//w3c//dtd xhtml 1.0 transitional//en" "http://www.w3.org/tr/xhtml1/dtd/xhtml1-transitional.dtd`:
-		return `xhtml 1.0 transitional`
-	case `html public "-//w3c//dtd xhtml 1.0 frameset//en" "http://www.w3.org/tr/xhtml1/dtd/xhtml1-frameset.dtd`:
-		return `xhtml 1.0 frameset`
-	case `html public "-//w3c//dtd xhtml 1.1//en" "http://www.w3.org/tr/xhtml11/dtd/xhtml11.dtd`:
-		return `xhtml 1.1`
-	case `html public "-//w3c//dtd xhtml basic 1.1//en" "http://www.w3.org/tr/xhtml-basic/xhtml-basic11.dtd`:
-		return `xhtml basic 1.1`
-	case `math public "-//w3c//dtd mathml 2.0//en" "http://www.w3.org/math/dtd/mathml2/mathml2.dtd`:
-		return `mathml 2.0`
-	case `math system "http://www.w3.org/math/dtd/mathml1/mathml.dtd`:
-		return `mathml 1.01`
-	default:
-		return `unknown`
+	if data == "html" {
+		return "html 5"
 	}
+
+	return data
 }
 
 func (svc *WebPageService) errorPageNotFound(cause error, statusCode int) error {
