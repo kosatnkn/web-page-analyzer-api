@@ -149,6 +149,7 @@ web-page-analyzer-api/
 The **WebPageService** at `web-page-analyzer-api/externals/services/WebPageService.go` is the main component that does all the heavy lifting. Everything else is basically plumbing. In order to improve the overall service, this piece needs to improve.
 - Set up benchmarking so that the service performance can be monitored properly.
 - Use parallel processing when it comes to HTTP token parsing.
+- At the moment tests are written only for the core of the service (Web Page Analyzer). All other plumbing code remains without tests. Need to add more tests there. Better yet should add these tests to the base project ([Catalyst](https://github.com/kosatnkn/catalyst)) itself.
 
 ---
 Powered By [Catalyst](https://github.com/kosatnkn/catalyst)
