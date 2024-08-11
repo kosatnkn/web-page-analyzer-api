@@ -29,7 +29,7 @@ func TestAnalyzeWithValidURL(t *testing.T) {
 	// input
 	svc := services.NewWebPageService()
 	validURL := "http://example.com"
-	cmp := []string{"title"}
+	cmp := []string{"title", "a", "form"}
 
 	// run
 	_, err := svc.Analyze(validURL, cmp)
