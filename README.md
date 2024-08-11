@@ -65,8 +65,8 @@ The service handles the **Request, Response Cycle** as follows.
                                        ||                 ||
                                        ||                 ||
                                        ||   + --------------------------- +
-                                       ||   | Transformer | Error Handler | (Transform response)
-                                       ||   + --------------------------- +
+                                       ||   | Transformer | Error Handler | (Transform
+                                       ||   + --------------------------- +  responses)
     (convert incoming data             ||    /\
      into domain objects)              \/    ||
     + -------------------- +  =>  + -------------- +
@@ -82,8 +82,8 @@ The service handles the **Request, Response Cycle** as follows.
                           _____________________________________
                               + ---------- +    + ------- +
                               | Repository |    | Service | (Interfacing logic needed to
-                              + ---------- +    + ------- +  communicate with external resources
-                                ||    /\          ||  /\     are here)
+                              + ---------- +    + ------- +  communicate with external
+                                ||    /\          ||  /\     resources are here)
                                 \/    ||          \/  ||
                               + ---------- +    + ------- +
                               |  Database  |    |   APIs  | (External resources)
