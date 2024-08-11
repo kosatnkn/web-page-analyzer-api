@@ -1,24 +1,57 @@
 package services_test
 
 import (
-	"fmt"
+	"reflect"
 	"testing"
 
+	i "github.com/kosatnkn/web-page-analyzer-api/domain/boundary/services"
 	"github.com/kosatnkn/web-page-analyzer-api/externals/services"
 )
 
-func TestAnalyze(t *testing.T) {
-	// input
-	svc := services.NewWebPageService()
-	url := "http://example.com"
-	cmp := []string{"h1", "h2", "h3"}
+func TestNewWebPageServiceInterfaceImpl(t *testing.T) {
+	// check
+	var _ i.WebPageServiceInterface = &services.WebPageService{}
+}
 
+func TestNewWebPageServiceType(t *testing.T) {
 	// run
-	_, err := svc.Analyze(url, cmp)
-	if err != nil {
-		t.Errorf("got %v", err)
-	}
+	s := services.NewWebPageService()
 
 	// check
-	fmt.Println("Done")
+	need := reflect.TypeOf(&services.WebPageService{})
+	got := reflect.TypeOf(s)
+	if got != need {
+		t.Errorf("need '%v', got '%v'", need, got)
+	}
+}
+
+func TestAnalyzeWithValidURL(t *testing.T) {
+	// input
+	svc := services.NewWebPageService()
+	validURL := "http://example.com"
+	cmp := []string{"title"}
+
+	// run
+	_, err := svc.Analyze(validURL, cmp)
+	if err != nil {
+		t.Errorf("need '%v', got '%v'", nil, err)
+	}
+}
+
+func TestAnalyzeWithInvalidURL(t *testing.T) {
+	// check panic
+	defer func() {
+		if r := recover(); r == nil {
+			t.Errorf("Expected to panic but did not")
+		}
+	}()
+
+	// input
+	invalidURL := "http://kcvjkvhjkvbhxmcvjhxcvjhzxcbvjxcvjkhxcjbv.xkjvjkvjknvkjnadjknv"
+
+	// run
+	svc := services.NewWebPageService()
+	cmp := []string{"title"}
+
+	svc.Analyze(invalidURL, cmp)
 }
