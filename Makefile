@@ -1,10 +1,13 @@
 # ref: https://bytes.usc.edu/cs104/wiki/makefile
-.PHONY: run test mock docker_build dep_upgrade_list dep_upgrade_all
+.PHONY: run test mock docker_run docker_build dep_upgrade_list dep_upgrade_all
 
 # Running and Testing
 run:
 	./metadata.sh
 	go run main.go
+
+docker_run: docker_build
+	docker run --name web-page-analyzer-api --rm -p 8000:8000 -p 8001:8001 kosatnkn/web-page-analyzer-api:latest
 
 test:
 	go test -v ./...
